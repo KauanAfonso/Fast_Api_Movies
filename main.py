@@ -55,7 +55,9 @@ def create_movie(movie: Filme_Model, response:Response, db: Session = Depends(ge
         
 #Pegando todos os flmes
 @app.get('/filmes/')
-def get_movies(db:Session = Depends(get_db)):
+def get_movies(db:Session = Depends(get_db), name: str | None = None):
+    if name != None:
+        data = db.query(Movies).filter(Movies.name == data.name)
     data = db.query(Movies).all()
     return data
 
